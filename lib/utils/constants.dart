@@ -24,3 +24,10 @@ const kFont24 = 24;
 const kFont20 = 20;
 const kFont16 = 16;
 const kFont10 = 10;
+
+
+// Platform  Firebase App Id
+// web       1:524709073997:web:1d60af19dafa948032b804
+// android   1:524709073997:android:5b599014af5b9c8b32b804
+// ios       1:524709073997:ios:864e747aef259f7232b804
+// macos     1:524709073997:ios:adbc0f291926c42732b804

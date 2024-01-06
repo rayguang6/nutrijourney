@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524709073997",
+    "project_id": "nutrijourney-666",
+    "storage_bucket": "nutrijourney-666.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524709073997:android:5b599014af5b9c8b32b804",
+        "android_client_info": {
+          "package_name": "com.nutrijourney.nutrijourney"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr8krpszY1OaUbW2ee1Z3xkGXSpg6shQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
