@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/screens/dashboard_screen.dart';
-import 'package:nutrijourney/screens/login_screen.dart';
+import 'package:nutrijourney/screens/signin_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: SignInScreen(),
     );
   }
 }
