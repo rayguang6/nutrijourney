@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/screens/dashboard_screen.dart';
+import 'package:nutrijourney/screens/responsive/mobile_screen.dart';
 import 'package:nutrijourney/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +50,7 @@ class SignInState extends State<SignInScreen> {
 
       await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (context) => const DashboardScreen()
+          builder: (context) => const MobileScreen()
           // builder: (context) => const ResponsiveScreen(
           //   mobileScreen: MobileScreen(),
           //   webScreen: WebScreen(),

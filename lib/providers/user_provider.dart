@@ -12,12 +12,6 @@ class UserProvider with ChangeNotifier {
   Future<void> setUser() async {
     try {
       UserModel user = await _authService.getUserDetails();
-      print(_user?.username);
-      print(_user?.email);
-
-      print("-----");
-      print(user.username);
-      print(user.email);
       _user = user;
       notifyListeners();
     } catch (e) {

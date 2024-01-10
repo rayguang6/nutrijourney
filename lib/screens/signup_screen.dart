@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nutrijourney/screens/responsive/mobile_screen.dart';
 import 'package:nutrijourney/screens/signin_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // Success, navigate to home or another appropriate screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => DashboardScreen()), // Replace with your home screen
+        MaterialPageRoute(builder: (context) => MobileScreen()), // Replace with your home screen
       );
     } else {
       // If registration fails, show a Snackbar with the error message
