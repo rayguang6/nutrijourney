@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nutrijourney/screens/signin_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/user_provider.dart';
 import '../services/auth_service.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
@@ -63,6 +64,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     if (errorMessage == null) {
+      //set the user first
+      await Provider.of<UserProvider>(context, listen: false).setUser();
+
       // Success, navigate to home or another appropriate screen
       Navigator.pushReplacement(
         context,
@@ -74,6 +78,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         SnackBar(content: Text(errorMessage)),
       );
     }
+
+
 
     setState(() {
       _isLoading = false;

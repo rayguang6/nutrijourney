@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class UserModel {
   final String uid;
   final String username;
   final String email;
   final String profileImage;
   List<String>? preference;
 
-  User({
+  UserModel({
     required this.uid,
     required this.username,
     required this.email,
@@ -15,7 +15,7 @@ class User {
     this.preference,
   });
 
-  static User fromSnap(DocumentSnapshot snap) {
+  static UserModel fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
     List<String>? preference = [];
@@ -23,7 +23,7 @@ class User {
       preference = List<String>.from(snapshot["preference"]);
     }
 
-    return User(
+    return UserModel(
       uid: snapshot["uid"],
       username: snapshot["username"],
       email: snapshot["email"],
@@ -39,4 +39,13 @@ class User {
     "profileImage": profileImage,
     "preference": preference ?? [],
   };
+
+  factory UserModel.fromMap(Map<String, dynamic> data) {
+    return UserModel(
+      uid: data['uid'],
+      username: data['username'],
+      email: data['email'],
+      profileImage: data['profileImage'],
+    );
+  }
 }

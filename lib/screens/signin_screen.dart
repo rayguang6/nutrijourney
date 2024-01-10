@@ -7,6 +7,7 @@ import 'package:nutrijourney/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
+import '../providers/user_provider.dart';
 import '../services/auth_service.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
@@ -36,9 +37,9 @@ class SignInState extends State<SignInScreen> {
     );
 
     if (response == "success") {
-      // await Provider.of<UserProvider>(context, listen: false).setUser();
+      await Provider.of<UserProvider>(context, listen: false).setUser();
       //
-      // User? user = Provider.of<UserProvider>(context, listen: false).getUser;
+      // UserModel? user = Provider.of<UserProvider>(context, listen: false).getUser;
 
       setState(() {
         _isLoading = false;
@@ -46,7 +47,6 @@ class SignInState extends State<SignInScreen> {
 
       Navigator.pop(context);
 
-      // Delayed navigation after 10 seconds
       await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const DashboardScreen()
@@ -67,6 +67,7 @@ class SignInState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -118,7 +119,7 @@ class SignInState extends State<SignInScreen> {
                     ),
                     child: !_isLoading
                         ? const Text(
-                      'Sign in',
+                      'Sign In',
                       style: TextStyle(color: Colors.white),
                     )
                         : const CircularProgressIndicator(

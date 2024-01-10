@@ -4,7 +4,10 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/user.dart' as model;
+import '../models/user.dart';
+import '../providers/user_provider.dart';
 import '../utils/utils.dart';
 
 class AuthService {
@@ -15,7 +18,7 @@ class AuthService {
     required String username,
     required String email,
     required String password,
-    required Uint8List file,
+    Uint8List? file,
   }) async {
 
     if(username.isEmpty || email.isEmpty || password.isEmpty || file == null ){
@@ -23,14 +26,19 @@ class AuthService {
     }
 
     try {
-
-      //first, we upload the image to the firebase storage, and getback the image link
-      String imageLink = await uploadImageToStorage('profilePicture', file);
+      String imageLink = "";
+      try {
+        //first, we upload the image to the firebase storage, and getback the image link
+        imageLink = await uploadImageToStorage('profilePicture', file);
+      }
+      catch(e){
+        return "Failed to upload image: ${e.toString()}";
+      }
 
       UserCredential userCredential = await _firebaseauth.createUserWithEmailAndPassword(email: email, password: password);
 
       //second, we create Dart model based on the data we get from signup form
-      model.User _user = model.User(
+      model.UserModel _user = model.UserModel(
         uid: userCredential.user!.uid,
         username: username,
         email: email,
@@ -42,6 +50,7 @@ class AuthService {
           .collection("users")
           .doc(userCredential.user!.email)
           .set(_user.toJson());
+
 
       return null; // Success
 
@@ -55,6 +64,9 @@ class AuthService {
     required String email,
     required String password,
   }) async {
+
+    //by default will return an error,
+    //if got something happens, then will update the message
     String response = "error signin user...";
 
     try {
@@ -74,5 +86,18 @@ class AuthService {
     return response;
   }
 
+  // get user details
+  Future<UserModel> getUserDetails() async {
+    User loggedInUser = _firebaseauth.currentUser!;
+
+    DocumentSnapshot documentSnapshot =
+    await _firestore.collection('users').doc(loggedInUser.email).get();
+
+    return UserModel.fromSnap(documentSnapshot);
+  }
+
+  Future<void> signOut() async {
+    await _firebaseauth.signOut();
+  }
 
 }

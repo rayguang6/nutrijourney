@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nutrijourney/screens/dashboard_screen.dart';
+import 'package:nutrijourney/providers/user_provider.dart';
 import 'package:nutrijourney/screens/signin_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -23,13 +22,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Meal Planner',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider(),),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Meal Planner',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: SignInScreen(),
       ),
-      home: SignInScreen(),
     );
   }
 }
