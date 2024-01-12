@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../models/user.dart';
 import '../providers/user_provider.dart';
 import '../screens/helper_screens/edit_post.dart';
-import '../screens/responsive/comment_screen.dart';
+import '../screens/helper_screens/comment_screen.dart';
 import '../services/post_service.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';

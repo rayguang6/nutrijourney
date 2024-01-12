@@ -56,28 +56,6 @@ class _EditPostScreenState extends State<EditPostScreen> {
       });
       showSnackBar(context, error.toString());
     }
-
-    // try {
-    //   String res = await PostService()
-    //       .createPost(title, content, _image, uid, username, profileImage);
-
-    //   if (res == "success") {
-    //     setState(() {
-    //       isLoading = false;
-    //     });
-    //     showSnackBar(context, 'Added Post $title');
-    //     _removeImage();
-    //     Navigator.pop(context);
-    //   } else {
-    //     showSnackBar(context, res);
-    //     Navigator.pop(context);
-    //   }
-    // } catch (err) {
-    //   setState(() {
-    //     isLoading = false;
-    //   });
-    //   showSnackBar(context, err.toString());
-    // }
   }
 
   // function to open dialog to pick image
