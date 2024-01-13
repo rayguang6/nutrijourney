@@ -360,7 +360,7 @@ class _RecipeCardState extends State<RecipeCard> {
                 FirebaseFirestore.instance
                     .collection('users')
                     .doc(email)
-                    .collection('planner')
+                    .collection('tracker')
                     .doc(formattedDate)
                     .collection(formattedDate)
                     .add({

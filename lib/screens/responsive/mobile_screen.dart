@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutrijourney/screens/tracker_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/user.dart';
@@ -22,10 +23,11 @@ class _MobileScreenState extends State<MobileScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    const DashboardScreen(),
-    const PlannerScreen(),
-    const RecipeScreen(),
-    const CommunityScreen(),
+    // const DashboardScreen(),
+    TrackerScreen(),
+    PlannerScreen(),
+    RecipeScreen(),
+    CommunityScreen(),
   ];
 
   void updatePage(int page) {

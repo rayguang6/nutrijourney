@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nutrijourney/utils/utils.dart';
 
-class PlannerScreen extends StatefulWidget {
-  const PlannerScreen({Key? key}) : super(key: key);
+import '../widgets/meal_tracker_container.dart';
+import '../widgets/meal_tracker_summary.dart';
+
+class TrackerScreen extends StatefulWidget {
+  const TrackerScreen({Key? key}) : super(key: key);
 
   @override
-  State<PlannerScreen> createState() => _PlannerScreenState();
+  State<TrackerScreen> createState() => _TrackerScreenState();
 }
 
-class _PlannerScreenState extends State<PlannerScreen> {
+class _TrackerScreenState extends State<TrackerScreen> {
+
   DateTime _currentDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
@@ -42,13 +47,13 @@ class _PlannerScreenState extends State<PlannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tracker Page'),
+        title: Text("Tracker"),
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Column(
           children: [
-            //Row is widget for selecting the date
+            //row is for the select date
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -74,16 +79,21 @@ class _PlannerScreenState extends State<PlannerScreen> {
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16.0),
-            const Expanded(child: SingleChildScrollView(
-              child: Column(
-                children: [
-                //  summary insights for the day
-                Text("Breakfast")
-                //  build out the container for breakfast, lunch, dinner
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    //summary container
+                    MealTrackerSummary(selectedDate: formatDate(_currentDate),),
 
-                ],
+                    //container for each meal
+                    MealTrackerContainer(mealType: 'Breakfast',selectedDate: formatDate(_currentDate),),
+                    MealTrackerContainer(mealType: 'Lunch',selectedDate: formatDate(_currentDate),),
+                    MealTrackerContainer(mealType: 'Dinner',selectedDate: formatDate(_currentDate),),
+                  ],
+                ),
               ),
-            ))
+            ),
           ],
         ),
       ),
