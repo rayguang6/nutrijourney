@@ -86,9 +86,10 @@ class MealTrackerContainer extends StatelessWidget {
                 });
 
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '$mealType Calories :  $totalCalories',
+                      '$totalCalories calories',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),

@@ -23,9 +23,9 @@ class _MobileScreenState extends State<MobileScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    // const DashboardScreen(),
+    const DashboardScreen(),
     TrackerScreen(),
-    PlannerScreen(),
+    // PlannerScreen(),
     RecipeScreen(),
     CommunityScreen(),
   ];
@@ -55,7 +55,7 @@ class _MobileScreenState extends State<MobileScreen> {
         onTap: updatePage,
         items: [
           _buildBottomNavigationBarItem(0, Icons.dashboard, 'Dashboard'),
-          _buildBottomNavigationBarItem(1, Icons.calendar_today, 'Planner'),
+          _buildBottomNavigationBarItem(1, Icons.calendar_today, 'Tracker'),
           _buildBottomNavigationBarItem(2, Icons.restaurant_menu, 'Recipe'),
           _buildBottomNavigationBarItem(3, Icons.people, 'Community'),
         ],

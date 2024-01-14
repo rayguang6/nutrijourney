@@ -46,56 +46,55 @@ class _TrackerScreenState extends State<TrackerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Tracker"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-        child: Column(
-          children: [
-            //row is for the select date
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.chevron_left),
-                  onPressed: goToPreviousDay,
-                ),
-                GestureDetector(
-                  onTap: () => _selectDate(context),
-                  child: Text(
-                    DateFormat('yyyy-MM-dd').format(_currentDate),
-                    style: const TextStyle(fontSize: 18.0),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+          child: Column(
+            children: [
+              //row is for the select date
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.chevron_left),
+                    onPressed: goToPreviousDay,
+                  ),
+                  GestureDetector(
+                    onTap: () => _selectDate(context),
+                    child: Text(
+                      DateFormat('yyyy-MM-dd').format(_currentDate),
+                      style: const TextStyle(fontSize: 18.0),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.chevron_right),
+                    onPressed: goToNextDay,
+                  ),
+                ],
+              ),
+              // const Text(
+              //   'Meal Plan',
+              //   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              // ),
+              const SizedBox(height: 16.0),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      //summary container
+                      MealTrackerSummary(selectedDate: formatDate(_currentDate)),
+                      const SizedBox(height: 16.0),
+                      //container for each meal
+                      MealTrackerContainer(mealType: 'Breakfast',selectedDate: formatDate(_currentDate),),
+                      MealTrackerContainer(mealType: 'Lunch',selectedDate: formatDate(_currentDate),),
+                      MealTrackerContainer(mealType: 'Dinner',selectedDate: formatDate(_currentDate),),
+
+                    ],
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.chevron_right),
-                  onPressed: goToNextDay,
-                ),
-              ],
-            ),
-            const Text(
-              'Meal Plan',
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16.0),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    //summary container
-                    MealTrackerSummary(selectedDate: formatDate(_currentDate),),
-
-                    //container for each meal
-                    MealTrackerContainer(mealType: 'Breakfast',selectedDate: formatDate(_currentDate),),
-                    MealTrackerContainer(mealType: 'Lunch',selectedDate: formatDate(_currentDate),),
-                    MealTrackerContainer(mealType: 'Dinner',selectedDate: formatDate(_currentDate),),
-
-                  ],
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
