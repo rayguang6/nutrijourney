@@ -6,6 +6,7 @@ import '../models/user.dart';
 import '../providers/user_provider.dart';
 import '../services/auth_service.dart';
 import '../utils/constants.dart';
+import 'notification_settings.dart';
 import 'preference_detail.dart';
 import 'profile_detail.dart';
 import 'signin_screen.dart';
@@ -128,19 +129,19 @@ class PreferenceList extends StatelessWidget {
             );
           },
         ),
-        // PreferenceItem(
-        //   icon: Icons.notifications,
-        //   title: 'Notifications',
-        //   subtitle: 'Customize notification settings',
-        //   onTap: () {
-        //     Navigator.push(
-        //       context,
-        //     MaterialPageRoute(builder: (c) => NotificationScreen()),
-        //     );
-        //     // Handle notifications preference tap
-        //     // showSnackBar(context, ' "Notification" Well Be Developed Later');
-        //   },
-        // ),
+        PreferenceItem(
+          icon: Icons.notifications,
+          title: 'Notifications',
+          subtitle: 'Customize notification settings',
+          onTap: () {
+            Navigator.push(
+              context,
+            MaterialPageRoute(builder: (c) => NotificationSettingsScreen()),
+            );
+            // Handle notifications preference tap
+            // showSnackBar(context, ' "Notification" Well Be Developed Later');
+          },
+        ),
         PreferenceItem(
           icon: Icons.settings,
           title: 'Settings',
