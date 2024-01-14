@@ -96,7 +96,7 @@ class MealTrackerContainer extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var meal = snapshot.data!.docs[index].data();
                         var documentId = snapshot.data!.docs[index].id;
-                        return _buildMealPlanItem(meal, documentId, user?.email);
+                        return _buildMealPlanItem(context, meal, documentId, user?.email, selectedDate);
                       },
                     ),
                     const SizedBox(height: 10.0),
@@ -111,7 +111,7 @@ class MealTrackerContainer extends StatelessWidget {
 }
 
 
-Widget _buildMealPlanItem(meal, documentId, userEmail) {
+Widget _buildMealPlanItem(BuildContext context, meal, documentId, userEmail, selectedDate) {
 
   return Container(
     margin: EdgeInsets.all(4),
@@ -142,7 +142,7 @@ Widget _buildMealPlanItem(meal, documentId, userEmail) {
           color: Colors.redAccent.shade200,
         ),
         onPressed: () {
-          // _confirmDeleteMeal(userEmail, documentId, _formatDate(currentDate));
+          _confirmDeleteMeal(context, userEmail, documentId, selectedDate);
         },
       ),
     ),
@@ -201,4 +201,64 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
       );
     },
   );
+}
+
+
+
+void _confirmDeleteMeal(context, userEmail, documentId, date) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Confirm Delete'),
+        content: Text('Are you sure you want to delete this meal?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              _deleteMealItem(context, userEmail, documentId, date);
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Text(
+                'Delete',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> _deleteMealItem(context, userEmail, documentId, date) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection('tracker')
+        .doc(date)
+        .collection(date)
+        .doc(documentId)
+        .delete();
+
+    showSnackBar(context, "Meal Deleted!");
+  } catch (error) {
+    // Handle any errors that occur during deletion
+    print('Error deleting meal item: $error');
+  }
 }
