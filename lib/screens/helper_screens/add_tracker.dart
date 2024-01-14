@@ -49,8 +49,6 @@ class _AddTrackerState extends State<AddTracker> {
       //get detail of current user
       final UserProvider userProvider =
       Provider.of<UserProvider>(context, listen: false);
-      String? uid = userProvider.getUser?.uid;
-      String? createdBy = userProvider.getUser?.username;
 
       //create a default image if user dont select image
       String imgPath = 'assets/images/default-recipe.png';

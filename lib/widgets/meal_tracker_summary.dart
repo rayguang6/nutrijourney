@@ -28,14 +28,6 @@ class MealTrackerSummary extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           }
-          // if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          //   return Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Container(
-          //       child: const Text("No Summary"),
-          //     ),
-          //   );
-          // }
 
 
           //method to calculate

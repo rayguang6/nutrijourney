@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrijourney/services/tracker_service.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
 import '../providers/user_provider.dart';
 import '../screens/helper_screens/add_tracker.dart';
+import '../screens/helper_screens/barcode_detail.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
 
@@ -150,6 +152,7 @@ Widget _buildMealPlanItem(BuildContext context, meal, documentId, userEmail, sel
 }
 
 
+
 void _showAddMealDialog(BuildContext context, String mealType, String selectedDate) {
   showDialog(
     context: context,
@@ -183,9 +186,24 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
             ListTile(
               leading: Icon(Icons.camera_alt),
               title: Text('Scan Barcode'),
-              onTap: () {
-                // TODO: Handle barcode scanning
-                Navigator.pop(context);
+              onTap: () async {
+                  String barcode = await TrackerService().scanBarcode();
+                  if (barcode.isNotEmpty && barcode != '-1') {
+                    print("SCANNED BARCODE **********************: $barcode");
+                    var productDetails = await TrackerService().fetchProductDetails(barcode);
+                    if (productDetails != null) {
+                      showSnackBar(context, "Scan Success");
+                      // After fetching product details from the API
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => BarcodeDetailScreen(productDetails: productDetails),
+                        ),
+                      );
+                    } else {
+                      // Handle case where product is not found
+                      showSnackBar(context, "No barcode scanned");
+                    }
+                  }
               },
             ),
             ListTile(
