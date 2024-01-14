@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/user.dart';
 import '../providers/user_provider.dart';
+import '../screens/helper_screens/add_tracker.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
 
@@ -46,11 +47,7 @@ class MealTrackerContainer extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const RecipeScreen()),
-                  // );
+                  _showAddMealDialog(context, mealType, selectedDate);
                 },
                 child: const Text('Add Plan'),
               ),
@@ -149,5 +146,59 @@ Widget _buildMealPlanItem(meal, documentId, userEmail) {
         },
       ),
     ),
+  );
+}
+
+
+void _showAddMealDialog(BuildContext context, String mealType, String selectedDate) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Add Meal - $mealType for $selectedDate'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.text_fields),
+              title: Text('Manual Entry'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AddTracker( mealType: mealType, dateSelected: selectedDate,),
+                  ),
+                );
+
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text('Recipe'),
+              onTap: () {
+                // TODO: Handle recipe selection
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Scan Barcode'),
+              onTap: () {
+                // TODO: Handle barcode scanning
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera),
+              title: Text('Take Picture'),
+              onTap: () {
+                // TODO: Handle image capture
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    },
   );
 }

@@ -90,6 +90,7 @@ class _TrackerScreenState extends State<TrackerScreen> {
                     MealTrackerContainer(mealType: 'Breakfast',selectedDate: formatDate(_currentDate),),
                     MealTrackerContainer(mealType: 'Lunch',selectedDate: formatDate(_currentDate),),
                     MealTrackerContainer(mealType: 'Dinner',selectedDate: formatDate(_currentDate),),
+
                   ],
                 ),
               ),
@@ -99,4 +100,5 @@ class _TrackerScreenState extends State<TrackerScreen> {
       ),
     );
   }
+
 }
