@@ -13,6 +13,7 @@ import '../utils/constants.dart';
 import '../utils/utils.dart';
 import '../widgets/text_input.dart';
 import 'dashboard_screen.dart';
+import 'onboarding/q1_gender_question.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -71,7 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // Success, navigate to home or another appropriate screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => MobileScreen()), // Replace with your home screen
+        MaterialPageRoute(builder: (context) => Q1_Gender()), // Replace with your home screen
       );
     } else {
       // If registration fails, show a Snackbar with the error message

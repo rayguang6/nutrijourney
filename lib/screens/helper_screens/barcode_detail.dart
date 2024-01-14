@@ -30,8 +30,8 @@ class BarcodeDetailScreen extends StatelessWidget {
               Text('Proteins: ${productDetails['nutriments']['proteins'] ?? 'N/A'}'),
               Text('Fats: ${productDetails['nutriments']['fat'] ?? 'N/A'}'),
 
-              SizedBox(height: 16,),
-              Text("Raw JSON Data:", style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16,),
+              const Text("Raw JSON Data:", style: TextStyle(fontWeight: FontWeight.bold)),
               SelectableText(rawJson, style: TextStyle(fontFamily: "monospace")),
             ],
           ),

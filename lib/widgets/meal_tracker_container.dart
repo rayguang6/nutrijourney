@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrijourney/screens/recipe_screen.dart';
 import 'package:nutrijourney/services/tracker_service.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +8,7 @@ import '../models/user.dart';
 import '../providers/user_provider.dart';
 import '../screens/helper_screens/add_tracker.dart';
 import '../screens/helper_screens/barcode_detail.dart';
+import '../screens/helper_screens/image_recognition_screen.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
 
@@ -179,8 +181,12 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
               leading: Icon(Icons.book),
               title: Text('Recipe'),
               onTap: () {
-                // TODO: Handle recipe selection
                 Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => RecipeScreen(),
+                  ),
+                );
               },
             ),
             ListTile(
@@ -208,10 +214,14 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
             ),
             ListTile(
               leading: Icon(Icons.camera),
-              title: Text('Take Picture'),
+              title: Text('Image Recognition'),
               onTap: () {
-                // TODO: Handle image capture
                 Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => FoodRecognitionScreen(),
+                  ),
+                );
               },
             ),
           ],

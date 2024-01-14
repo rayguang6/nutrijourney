@@ -6,6 +6,14 @@ class UserModel {
   final String email;
   final String profileImage;
   List<String>? preference;
+  List<String>? allergies;
+  String? gender;
+  num? weight;
+  num? height;
+  num? age;
+  String? goal;
+  String? activeLevel;
+
 
   UserModel({
     required this.uid,
@@ -13,6 +21,13 @@ class UserModel {
     required this.email,
     required this.profileImage,
     this.preference,
+    this.allergies,
+    this.gender,
+    this.weight,
+    this.height,
+    this.age,
+    this.goal,
+    this.activeLevel,
   });
 
   static UserModel fromSnap(DocumentSnapshot snap) {
@@ -22,6 +37,10 @@ class UserModel {
     if (snapshot["preference"] != null) {
       preference = List<String>.from(snapshot["preference"]);
     }
+    List<String>? allergies = [];
+    if (snapshot["allergies"] != null) {
+      allergies = List<String>.from(snapshot["allergies"]);
+    }
 
     return UserModel(
       uid: snapshot["uid"],
@@ -29,6 +48,13 @@ class UserModel {
       email: snapshot["email"],
       profileImage: snapshot["profileImage"],
       preference: preference,
+      allergies: allergies,
+      gender: snapshot["gender"],
+      weight: snapshot["weight"],
+      height: snapshot["height"],
+      age: snapshot["age"],
+      goal: snapshot["goal"],
+      activeLevel: snapshot["activeLevel"],
     );
   }
 
@@ -38,14 +64,12 @@ class UserModel {
     "email": email,
     "profileImage": profileImage,
     "preference": preference ?? [],
+    "allergies": allergies ?? [],
+    "gender": gender,
+    "weight": weight,
+    "height": height,
+    "age": age,
+    "goal": goal,
+    "activeLevel": activeLevel,
   };
-
-  factory UserModel.fromMap(Map<String, dynamic> data) {
-    return UserModel(
-      uid: data['uid'],
-      username: data['username'],
-      email: data['email'],
-      profileImage: data['profileImage'],
-    );
-  }
 }
