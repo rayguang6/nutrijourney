@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nutrijourney/screens/onboarding/onboarding_success_screen.dart';
 import 'package:nutrijourney/screens/onboarding/q3_weight_height.dart';
 import 'package:nutrijourney/screens/responsive/mobile_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../services/onboarding_service.dart';
 
 class Q4_Goal extends StatefulWidget {
@@ -15,10 +18,11 @@ class _Q4_GoalState extends State<Q4_Goal> {
     final OnboardingService _onboardingService = OnboardingService();
 
     await _onboardingService.saveUserData({'activeLevel': answer});
+    await Provider.of<UserProvider>(context, listen: false).setUser();
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MobileScreen()), // Replace with the next onboarding screen
+      MaterialPageRoute(builder: (context) => OnboardingSuccessScreen()), // Replace with the next onboarding screen
     );
   }
 

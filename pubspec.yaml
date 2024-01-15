@@ -32,6 +32,8 @@ dependencies:
   firebase_messaging: ^14.7.10
   timezone: ^0.9.2
   fl_chart: ^0.40.0
+  syncfusion_flutter_charts: ^21.2.10
+  syncfusion_flutter_gauges: ^21.2.10
 
 dev_dependencies:
   flutter_test:

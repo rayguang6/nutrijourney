@@ -23,7 +23,7 @@ class _MobileScreenState extends State<MobileScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    const DashboardScreen(),
+    DashboardScreen(),
     TrackerScreen(),
     // PlannerScreen(),
     RecipeScreen(),
