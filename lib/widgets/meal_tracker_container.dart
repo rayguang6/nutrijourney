@@ -8,7 +8,8 @@ import '../models/user.dart';
 import '../providers/user_provider.dart';
 import '../screens/helper_screens/add_tracker.dart';
 import '../screens/helper_screens/barcode_detail.dart';
-import '../screens/helper_screens/image_recognition_screen.dart';
+import '../screens/helper_screens/image_recog2.dart';
+import '../screens/helper_screens/food_recognition_screen.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
 
@@ -221,6 +222,18 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => FoodRecognitionScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera),
+              title: Text('Image Recognition 2'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ImageRecog2(),
                   ),
                 );
               },

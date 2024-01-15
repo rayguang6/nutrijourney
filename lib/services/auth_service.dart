@@ -25,6 +25,8 @@ class AuthService {
       return "Please Fill in All Fields";
     }
 
+    UserCredential userCredential = await _firebaseauth.createUserWithEmailAndPassword(email: email, password: password);
+
     try {
       String imageLink = "";
       try {
@@ -35,7 +37,6 @@ class AuthService {
         return "Failed to upload image: ${e.toString()}";
       }
 
-      UserCredential userCredential = await _firebaseauth.createUserWithEmailAndPassword(email: email, password: password);
 
       //second, we create Dart model based on the data we get from signup form
       model.UserModel _user = model.UserModel(

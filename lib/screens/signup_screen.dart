@@ -39,12 +39,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   //function for calling utils to selectImage
   pickImage() async {
-    Uint8List imageUploaded = await selectImage(ImageSource.gallery);
-
-    //use setstate to update the uploaded image, then we can replace the default profile image
-    setState(() {
-      _image = imageUploaded;
-    });
+    try {
+      Uint8List imageUploaded = await selectImage(ImageSource.gallery);
+      setState(() {
+        _image = imageUploaded;
+      });
+    } catch (e) {
+      print("Error picking image: ${e.toString()}");
+      // Handle the error or set _image to a default value
+    }
   }
 
   void signUpUser() async{

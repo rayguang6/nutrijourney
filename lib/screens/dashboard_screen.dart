@@ -85,7 +85,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Text('Todays Calories Progress'),
               SizedBox(height: 16),
-              _buildProgressChart(suggestedCalories.roundToDouble().toInt(), 1250),
+              _buildProgressChart(suggestedCalories.roundToDouble().toInt()??2000, 1250),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(

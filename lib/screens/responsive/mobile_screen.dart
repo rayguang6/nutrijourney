@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../models/user.dart';
 import '../../providers/user_provider.dart';
 import '../../utils/constants.dart';
+import '../ai_chat.dart';
 import '../community_screen.dart';
 import '../dashboard_screen.dart';
 import '../planner_screen.dart';
@@ -23,7 +24,8 @@ class _MobileScreenState extends State<MobileScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    DashboardScreen(),
+    AIChatBot(),
+    // DashboardScreen(),
     TrackerScreen(),
     // PlannerScreen(),
     RecipeScreen(),
