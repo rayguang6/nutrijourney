@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nutrijourney/screens/dashboard_screen.dart';
 import 'package:nutrijourney/screens/responsive/mobile_screen.dart';
 import 'package:nutrijourney/screens/signup_screen.dart';
@@ -76,12 +77,17 @@ class SignInState extends State<SignInScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 16),
+                // const SizedBox(height: 16),
                 Image.asset(
-                  'assets/images/vertical_logo.png',
-                  height: 200,
+                  // 'assets/images/vertical_logo.png',
+                  'assets/images/nutrijourney_logo.gif',
+                  // "assets/images/NutriJourney Final Logo.png",
+                  height: 350,
                 ),
+
+                Text("Lets Begin your Healthy Journey"),
                 const SizedBox(height: 32),
                 TextInputField(
                   hintText: 'Enter Your Email',
@@ -111,21 +117,36 @@ class SignInState extends State<SignInScreen> {
                   child: Container(
                     width: double.infinity,
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     decoration: const ShapeDecoration(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
                       color: kPrimaryGreen,
                     ),
                     child: !_isLoading
                         ? const Text(
                       'Sign In',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     )
-                        : const CircularProgressIndicator(
-                      color: kWhite,
-                    ),
+                        : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("Signing In",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+
+                                )
+                              ),
+                              SpinKitDoubleBounce(
+                                color: kWhite,
+                              ),
+                            ],
+                          )
+
                   ),
                 ),
                 const SizedBox(height: 12),

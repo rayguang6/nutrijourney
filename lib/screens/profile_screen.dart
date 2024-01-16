@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:nutrijourney/screens/helper_screens/goal_page.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
@@ -126,6 +127,17 @@ class PreferenceList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (c) => PreferenceDetailScreen()),
+            );
+          },
+        ),
+        PreferenceItem(
+          icon: Icons.accessibility_new_rounded,
+          title: 'Goal',
+          subtitle: 'Change your Goal',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (c) => GoalPage()),
             );
           },
         ),

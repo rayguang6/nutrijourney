@@ -16,7 +16,7 @@ class _AIChatBotState extends State<AIChatBot> {
     token: OPENAI_API,
     baseOption: HttpSetup(
       receiveTimeout: const Duration(
-          seconds: 5),
+          seconds: 20),
     ),
     enableLog: true,
   );
@@ -24,9 +24,10 @@ class _AIChatBotState extends State<AIChatBot> {
   final ChatUser _currentUser = ChatUser(
       id: '1', firstName: "Lei", lastName: "Guang");
   final ChatUser _gptUser = ChatUser(
-      id: '2', firstName: "Nutri", lastName: "Journey");
+      id: '2', firstName: "A", lastName: ".I   Nutrijourney");
 
   List<ChatMessage> _messages = <ChatMessage>[];
+  List<ChatUser> _typingUser = <ChatUser>[];
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class _AIChatBotState extends State<AIChatBot> {
         ),
         body: DashChat(
           currentUser: _currentUser,
+          typingUsers: _typingUser,
           messageOptions: const MessageOptions(
             currentUserContainerColor: kBlack,
             containerColor: kPrimaryGreen,
@@ -55,6 +57,7 @@ class _AIChatBotState extends State<AIChatBot> {
     Future<void> getChatRespone(ChatMessage m) async {
       setState(() {
         _messages.insert(0, m);
+        _typingUser.add(_gptUser);
       });
 
       List<Messages> _messagesHistory = _messages.reversed.map((m) {
@@ -88,6 +91,10 @@ class _AIChatBotState extends State<AIChatBot> {
           });
         }
       }
+
+      setState(() {
+        _typingUser.remove(_gptUser);
+      });
 
     }
 }

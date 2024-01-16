@@ -58,8 +58,8 @@ class NotificationService {
     var generalNotificationDetails = NotificationDetails(android: androidDetails);
     await _notificationsPlugin.show(
       0,
-      'Breakfast Time',
-      'Remember to Track your breakfast!',
+      'Nutrijourney Time ',
+      'Remember to Track your Meal!',
       generalNotificationDetails,
     );
   }

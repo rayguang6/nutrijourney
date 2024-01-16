@@ -11,6 +11,7 @@ class NotificationSettingsScreen extends StatefulWidget {
 
 class _NotificationSettingsScreenState extends State<NotificationSettingsScreen> {
 
+
   bool breakfastNotification = false;
   bool lunchNotification = false;
   bool dinnerNotification = false;
@@ -71,16 +72,16 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
 
     if (lunchNotification) {
       DateTime lunchDateTime = _getNextDateTime(lunchTime);
-      NotificationService.scheduleNotification(1, 'Lunch', lunchDateTime);
+      NotificationService.scheduleNotification(2, 'Lunch', lunchDateTime);
     } else {
-      NotificationService.cancelNotification(1);
+      NotificationService.cancelNotification(2);
     }
 
     if (dinnerNotification) {
       DateTime dinnerDateTime = _getNextDateTime(dinnerTime);
-      NotificationService.scheduleNotification(1, 'Dinner', dinnerDateTime);
+      NotificationService.scheduleNotification(3, 'Dinner', dinnerDateTime);
     } else {
-      NotificationService.cancelNotification(1);
+      NotificationService.cancelNotification(3);
     }
 
   }
@@ -185,7 +186,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
               },
               highlightColor: Colors.transparent, // Set the highlight color to transparent
               splashColor: Colors.transparent, // Set t
-              child: Center(
+              child: const Center(
                 child: Text(
                   "", // Add your text here
                   style: TextStyle(
@@ -195,9 +196,6 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
               ),
             ),
           )
-
-
-
 
         ],
       ),

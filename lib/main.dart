@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:nutrijourney/providers/user_provider.dart';
 import 'package:nutrijourney/screens/signin_screen.dart';
 import 'package:nutrijourney/services/notification_service.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -36,10 +38,12 @@ void main() async{
   // flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
   //     AndroidFlutterLocalNotificationsPlugin>()?.requestExactAlarmsPermission();
 
-  // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  // var androidPlatformSpecifics = flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
-  // androidPlatformSpecifics?.requestExactAlarmsPermission();
-
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(const MyApp());
 }

@@ -11,7 +11,15 @@ const kWhite = Colors.white;
 const kBlack = Color(0xFF03160B);
 const kGrey = Color(0xFF7E9086);
 const kLightGreen = Color(0xFFBEE45D);
-const kPrimaryGreen = Color(0xFF51BC7C);
+// const kPrimaryGreen = Color(0xFF51BC7C);
+
+//logo green
+// const kPrimaryGreen = Color(0xFF62EF8C);
+const kPrimaryGreen = Color(0xFF35E66A);
+
+//spotify green
+// const kPrimaryGreen = Color(0xFF1ED760);
+
 const kDarkGreen = Color(0xFF043719);
 const kBackgroundGreen = Color(0xFFADFFCE);
 
