@@ -40,5 +40,3 @@ const kFont10 = 10;
 // ios       1:524709073997:ios:864e747aef259f7232b804
 // macos     1:524709073997:ios:adbc0f291926c42732b804
 
-
-const OPENAI_API = "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";

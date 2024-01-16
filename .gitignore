@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+lib/utils/env.dart
 
 # IntelliJ related
 *.iml
@@ -31,6 +32,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+
 
 # Symbolication related
 app.*.symbols

@@ -3,6 +3,8 @@ import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/utils/constants.dart';
 
+import '../utils/env.dart';
+
 class AIChatBot extends StatefulWidget {
   const AIChatBot({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class AIChatBot extends StatefulWidget {
 class _AIChatBotState extends State<AIChatBot> {
 
   final _openAI = OpenAI.instance.build(
-    token: OPENAI_API,
+    token: OPEN_API_KEY,
     baseOption: HttpSetup(
       receiveTimeout: const Duration(
           seconds: 20),
