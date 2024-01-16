@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/screens/dashboard_screen.dart';
-import 'package:nutrijourney/screens/onboarding/q4_goal.dart';
+import 'package:nutrijourney/screens/onboarding/q4_allergic.dart';
+import 'package:nutrijourney/screens/onboarding/q5_goal.dart';
 import 'package:nutrijourney/screens/responsive/mobile_screen.dart';
 
 import '../../services/onboarding_service.dart';
@@ -9,7 +10,6 @@ import '../../utils/constants.dart';
 import '../../utils/utils.dart';
 
 class Q3_WeightHeight extends StatefulWidget {
-
 
   @override
   State<Q3_WeightHeight> createState() => _Q3_WeightHeightState();
@@ -27,7 +27,7 @@ class _Q3_WeightHeightState extends State<Q3_WeightHeight> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Q4_Goal()), // Replace with the next onboarding screen
+      MaterialPageRoute(builder: (context) => Q4_AllergySelection()), // Replace with the next onboarding screen
     );
   }
 

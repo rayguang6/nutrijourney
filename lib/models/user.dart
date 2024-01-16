@@ -13,6 +13,8 @@ class UserModel {
   num? age;
   String? goal;
   String? activeLevel;
+  num? suggestedCalories;
+  num? BMR;
 
 
   UserModel({
@@ -28,6 +30,8 @@ class UserModel {
     this.age,
     this.goal,
     this.activeLevel,
+    this.suggestedCalories,
+    this.BMR,
   });
 
   static UserModel fromSnap(DocumentSnapshot snap) {
@@ -55,6 +59,8 @@ class UserModel {
       age: snapshot["age"],
       goal: snapshot["goal"],
       activeLevel: snapshot["activeLevel"],
+      suggestedCalories: snapshot["suggestedCalories"],
+      BMR : snapshot["BMR"],
     );
   }
 
@@ -71,5 +77,7 @@ class UserModel {
     "age": age,
     "goal": goal,
     "activeLevel": activeLevel,
+    "suggestedCalories": suggestedCalories,
+    "BMR": BMR,
   };
 }
