@@ -21,11 +21,10 @@ class _AIChatBotState extends State<AIChatBot> {
     enableLog: true,
   );
 
-
   final ChatUser _currentUser = ChatUser(
       id: '1', firstName: "Lei", lastName: "Guang");
   final ChatUser _gptUser = ChatUser(
-      id: '2', firstName: "Nutri", lastName: "GPT");
+      id: '2', firstName: "Nutri", lastName: "Journey");
 
   List<ChatMessage> _messages = <ChatMessage>[];
 
