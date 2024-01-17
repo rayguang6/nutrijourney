@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nutrijourney/utils/utils.dart';
 
+import '../widgets/DraggableFloatingChatIcon.dart';
 import '../widgets/meal_tracker_container.dart';
 import '../widgets/meal_tracker_summary.dart';
+import 'ai_chat.dart';
 
 class TrackerScreen extends StatefulWidget {
   const TrackerScreen({Key? key}) : super(key: key);
@@ -46,56 +48,72 @@ class _TrackerScreenState extends State<TrackerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-          child: Column(
-            children: [
-              //row is for the select date
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.chevron_left),
-                    onPressed: goToPreviousDay,
-                  ),
-                  GestureDetector(
-                    onTap: () => _selectDate(context),
-                    child: Text(
-                      DateFormat('yyyy-MM-dd').format(_currentDate),
-                      style: const TextStyle(fontSize: 18.0),
+      body: Stack(
+        children: [SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+            child: Column(
+              children: [
+                //row is for the select date
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.chevron_left),
+                      onPressed: goToPreviousDay,
+                    ),
+                    GestureDetector(
+                      onTap: () => _selectDate(context),
+                      child: Text(
+                        DateFormat('yyyy-MM-dd').format(_currentDate),
+                        style: const TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.chevron_right),
+                      onPressed: goToNextDay,
+                    ),
+                  ],
+                ),
+                // const Text(
+                //   'Meal Plan',
+                //   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                // ),
+                const SizedBox(height: 16.0),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        //summary container
+                        MealTrackerSummary(selectedDate: formatDate(_currentDate)),
+                        const SizedBox(height: 16.0),
+                        //container for each meal
+                        MealTrackerContainer(mealType: 'Breakfast',selectedDate: formatDate(_currentDate),),
+                        MealTrackerContainer(mealType: 'Lunch',selectedDate: formatDate(_currentDate),),
+                        MealTrackerContainer(mealType: 'Dinner',selectedDate: formatDate(_currentDate),),
+
+
+                      ],
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.chevron_right),
-                    onPressed: goToNextDay,
-                  ),
-                ],
-              ),
-              // const Text(
-              //   'Meal Plan',
-              //   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              // ),
-              const SizedBox(height: 16.0),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      //summary container
-                      MealTrackerSummary(selectedDate: formatDate(_currentDate)),
-                      const SizedBox(height: 16.0),
-                      //container for each meal
-                      MealTrackerContainer(mealType: 'Breakfast',selectedDate: formatDate(_currentDate),),
-                      MealTrackerContainer(mealType: 'Lunch',selectedDate: formatDate(_currentDate),),
-                      MealTrackerContainer(mealType: 'Dinner',selectedDate: formatDate(_currentDate),),
-
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: DraggableFloatingChatIcon(
+              // onTap: _showChatBotOverlay,
+              onTap: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AIChatBot()),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

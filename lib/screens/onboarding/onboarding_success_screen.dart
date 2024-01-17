@@ -86,9 +86,15 @@ class _OnboardingSuccessScreenState extends State<OnboardingSuccessScreen> {
       await _onboardingService.saveUserData({'BMR': BMR.roundToDouble()});
       await Provider.of<UserProvider>(context, listen: false).setUser();
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MobileScreen()), // Replace with the next onboarding screen
+      await Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => const MobileScreen()
+          // builder: (context) => const ResponsiveScreen(
+          //   mobileScreen: MobileScreen(),
+          //   webScreen: WebScreen(),
+          // ),
+        ),
+            (route) => false,
       );
     }
 

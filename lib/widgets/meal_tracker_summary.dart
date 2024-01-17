@@ -39,13 +39,6 @@ class MealTrackerSummary extends StatelessWidget {
 
         for (var doc in snapshot.data!.docs) {
           var data = doc.data() as Map<String, dynamic>;
-          totalCarbs += data['carbohydrates'] ?? 0;
-          totalProteins += data['proteins'] ?? 0;
-          totalFats += data['fats'] ?? 0;
-        }
-
-        for (var doc in snapshot.data!.docs) {
-          var data = doc.data() as Map<String, dynamic>;
           totalCalories += (data['calories'] as num);
           if (data.containsKey('carbohydrates')) {
             totalCarbs += (data['carbohydrates'] as num);

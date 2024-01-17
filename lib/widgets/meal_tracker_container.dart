@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/screens/recipe_screen.dart';
 import 'package:nutrijourney/services/tracker_service.dart';
+import 'package:nutrijourney/widgets/meal_suggest.dart';
+import 'package:nutrijourney/widgets/recipe_card.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
@@ -10,6 +12,7 @@ import '../screens/helper_screens/add_tracker.dart';
 import '../screens/helper_screens/barcode_detail.dart';
 import '../screens/helper_screens/image_recog2.dart';
 import '../screens/helper_screens/food_recognition_screen.dart';
+import '../services/auth_service.dart';
 import '../utils/constants.dart';
 import '../utils/utils.dart';
 
@@ -54,7 +57,10 @@ class MealTrackerContainer extends StatelessWidget {
                 onPressed: () {
                   _showAddMealDialog(context, mealType, selectedDate);
                 },
-                child: const Text('Add Plan'),
+                style: ElevatedButton.styleFrom(
+                  primary: kPrimaryGreen,
+                ),
+                child: Text('Add Meal'),
               ),
             ],
           ),
@@ -91,7 +97,7 @@ class MealTrackerContainer extends StatelessWidget {
                   children: [
                     Text(
                       '$totalCalories calories',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -106,10 +112,20 @@ class MealTrackerContainer extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 10.0),
+
                   ],
                 );
             },
           ),
+
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20, color: kPrimaryGreen),
+            ),
+            onPressed: () => _showBottomSheet(context, mealType, selectedDate),
+            child: const Text('Get Meal Suggestion'),
+          ),
+          const SizedBox(height: 10.0),
         ],
       ),
     );
@@ -155,8 +171,6 @@ Widget _buildMealPlanItem(BuildContext context, meal, documentId, userEmail, sel
   );
 }
 
-
-
 void _showAddMealDialog(BuildContext context, String mealType, String selectedDate) {
   showDialog(
     context: context,
@@ -164,7 +178,7 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
       return AlertDialog(
         title: Text('Add Meal - $mealType for $selectedDate'),
         content: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.text_fields),
@@ -245,8 +259,6 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
   );
 }
 
-
-
 void _confirmDeleteMeal(context, userEmail, documentId, date) {
   showDialog(
     context: context,
@@ -303,4 +315,37 @@ Future<void> _deleteMealItem(context, userEmail, documentId, date) async {
     // Handle any errors that occur during deletion
     print('Error deleting meal item: $error');
   }
+}
+
+
+void _showBottomSheet(BuildContext context, String mealType, String selectedDate) async{
+
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
+    ),
+    builder: (BuildContext context) {
+
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.75,
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // Constrain the height of the Column
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                "Suggestion for your $mealType",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: MealSuggest(mealType: mealType,selectedDate: selectedDate,),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

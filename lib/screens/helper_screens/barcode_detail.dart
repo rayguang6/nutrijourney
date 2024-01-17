@@ -19,21 +19,23 @@ class BarcodeDetailScreen extends StatelessWidget {
 
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (productDetails['image_url'] != null)
-                Image.network(productDetails['image_url']),
-              Text('Name: ${productDetails['product_name'] ?? 'N/A'}'),
-              Text('Calories: ${productDetails['nutriments']['energy_value'] ?? 'N/A'}'),
-              Text('Carbs: ${productDetails['nutriments']['carbohydrates'] ?? 'N/A'}'),
-              Text('Proteins: ${productDetails['nutriments']['proteins'] ?? 'N/A'}'),
-              Text('Fats: ${productDetails['nutriments']['fat'] ?? 'N/A'}'),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (productDetails['image_url'] != null)
+                  Image.network(productDetails['image_url']),
+                Text('Name: ${productDetails['product_name'] ?? 'N/A'}'),
+                Text('Calories: ${productDetails['nutriments']['energy_value'] ?? 'N/A'}'),
+                Text('Carbs: ${productDetails['nutriments']['carbohydrates'] ?? 'N/A'}'),
+                Text('Proteins: ${productDetails['nutriments']['proteins'] ?? 'N/A'}'),
+                Text('Fats: ${productDetails['nutriments']['fat'] ?? 'N/A'}'),
 
-              const SizedBox(height: 16,),
-              const Text("Raw JSON Data:", style: TextStyle(fontWeight: FontWeight.bold)),
-              SelectableText(rawJson, style: TextStyle(fontFamily: "monospace")),
-            ],
+                const SizedBox(height: 16,),
+                const Text("Raw JSON Data:", style: TextStyle(fontWeight: FontWeight.bold)),
+                // SelectableText(rawJson, style: TextStyle(fontFamily: "monospace")),
+              ],
+            ),
           ),
         ),
       ),

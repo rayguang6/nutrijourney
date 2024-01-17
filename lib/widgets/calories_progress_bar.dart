@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutrijourney/utils/constants.dart';
 
 class CaloriesProgressBar extends StatelessWidget {
   final double consumedCalories;
@@ -28,6 +29,7 @@ class CaloriesProgressBar extends StatelessWidget {
             value: progress,
             minHeight: 20,
             backgroundColor: Colors.grey[300],
+            // color: kPrimaryGreen,
             valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
           ),
         ),

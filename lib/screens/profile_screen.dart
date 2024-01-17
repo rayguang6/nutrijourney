@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/screens/helper_screens/goal_page.dart';
+import 'package:nutrijourney/screens/helper_screens/track_weight.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
@@ -149,6 +150,19 @@ class PreferenceList extends StatelessWidget {
             Navigator.push(
               context,
             MaterialPageRoute(builder: (c) => NotificationSettingsScreen()),
+            );
+            // Handle notifications preference tap
+            // showSnackBar(context, ' "Notification" Well Be Developed Later');
+          },
+        ),
+        PreferenceItem(
+          icon: Icons.monitor_weight_outlined ,
+          title: 'Weight Tracking',
+          subtitle: 'Track and Monitor Your Weight',
+          onTap: () {
+            Navigator.push(
+              context,
+            MaterialPageRoute(builder: (c) => TrackWeightScreen()),
             );
             // Handle notifications preference tap
             // showSnackBar(context, ' "Notification" Well Be Developed Later');

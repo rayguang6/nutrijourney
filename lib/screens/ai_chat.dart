@@ -36,6 +36,15 @@ class _AIChatBotState extends State<AIChatBot> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Nutri AI Chat "),
+          backgroundColor: kPrimaryGreen,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  // Perform sort action
+                },
+                icon: const Icon(Icons.chat),
+              ),
+            ],
         ),
         body: DashChat(
           currentUser: _currentUser,
