@@ -37,48 +37,75 @@ class _Q2_AgeState extends State<Q2_Age> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Your Age")),
+      appBar: AppBar(title: Text("Your Age"),
+      backgroundColor: kPrimaryGreen,
+        bottom: PreferredSize(
+          preferredSize: Size(30, 30),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Step 2 of 6",
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.8),
+              ),
+            ),
+          ),
+        ),
+        elevation: 0.1,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
 
-            TextFormField(
-              controller: ageController,
-              inputFormatters: [NumericInputFormatter()],
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Age',
-                border: OutlineInputBorder(),
+            Text("Your Age", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
+            SizedBox(height: 32,),
+            Container(
+              width: 200,
+              child: TextFormField(
+                controller: ageController,
+                inputFormatters: [NumericInputFormatter()],
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Age',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter number';
+                  }
+                  return null;
+                },
               ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter number';
-                }
-                return null;
-              },
             ),
 
+            SizedBox(height: 32,),
 
 
-            InkWell(
-              onTap: () {
-                _saveData(int.parse(ageController.text));
-              },
-              child: Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: const ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
+            Container(
+              width: 200,
+              child: InkWell(
+                onTap: () {
+                  _saveData(int.parse(ageController.text));
+                },
+                child: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      color: kPrimaryGreen,
                     ),
-                    color: kPrimaryGreen,
-                  ),
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(color: Colors.white),
-                  )),
+                    child: const Text(
+                      'Next 👉️️',
+                      style: TextStyle(color: Colors.white,
+                      fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+              ),
             ),
 
           ],

@@ -18,18 +18,38 @@ void showSnackBar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).clearSnackBars();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(message),
+      content: Text(message,style: TextStyle(
+        color: kDarkGreen
+      ),),
       duration: const Duration(seconds: 2),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      backgroundColor: kBlack,
-      elevation: 8.0,
-      margin: const EdgeInsets.all(8.0),
+      backgroundColor: Colors.white,
+      elevation: 16.0,
+      margin: const EdgeInsets.all(16.0),
     ),
   );
 }
+
+
+// void showSnackBar(BuildContext context, String message) {
+//   ScaffoldMessenger.of(context).clearSnackBars();
+//   ScaffoldMessenger.of(context).showSnackBar(
+//     SnackBar(
+//       content: Text(message),
+//       duration: const Duration(seconds: 2),
+//       behavior: SnackBarBehavior.floating,
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(8.0),
+//       ),
+//       backgroundColor: kBlack,
+//       elevation: 8.0,
+//       margin: const EdgeInsets.all(8.0),
+//     ),
+//   );
+// }
 
 //for picking image from gallery
 selectImage(ImageSource imageSource) async {

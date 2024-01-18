@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrijourney/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +9,8 @@ import '../../models/user.dart';
 import '../../providers/user_provider.dart';
 import '../../services/onboarding_service.dart';
 import '../responsive/mobile_screen.dart';
+import '../responsive/responsive_wrapper.dart';
+import '../responsive/web_screen.dart';
 
 class OnboardingSuccessScreen extends StatefulWidget {
   const OnboardingSuccessScreen({Key? key}) : super(key: key);
@@ -15,7 +20,26 @@ class OnboardingSuccessScreen extends StatefulWidget {
 }
 
 class _OnboardingSuccessScreenState extends State<OnboardingSuccessScreen> {
+  ConfettiController _confettiController = ConfettiController();
+  late ConfettiController _controllerCenter;
 
+  @override
+  void initState() {
+     _confettiController = ConfettiController(duration: Duration(milliseconds: 800));
+    // _confettiController = ConfettiController();
+    // _controllerCenter =ConfettiController(duration: const Duration(seconds: 2));
+    // _controllerCenter.play();
+    _confettiController.play();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controllerCenter.dispose();
+    _confettiController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +112,10 @@ class _OnboardingSuccessScreenState extends State<OnboardingSuccessScreen> {
 
       await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-            builder: (context) => const MobileScreen()
-          // builder: (context) => const ResponsiveScreen(
-          //   mobileScreen: MobileScreen(),
-          //   webScreen: WebScreen(),
-          // ),
+          builder: (context) => const ResponsiveWrapper(
+            mobileScreen: MobileScreen(),
+            webScreen: WebScreen(),
+          ),
         ),
             (route) => false,
       );
@@ -106,15 +129,25 @@ class _OnboardingSuccessScreenState extends State<OnboardingSuccessScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Align(
+                alignment: Alignment.center,
+                child: ConfettiWidget(
+                  confettiController: _confettiController,
+                  blastDirection: -pi / 2,
+                  emissionFrequency: 0.2,
+                  numberOfParticles: 20,
+                  blastDirectionality: BlastDirectionality.explosive,
+                ),
+              ),
+
               Text('👋 Hi $username', style: TextStyle(fontSize: 32, color: kPrimaryGreen, fontWeight: FontWeight.bold, ),textAlign: TextAlign.center,),
-              Text('Welcome to NutriJourney!', style: TextStyle(fontSize: 24, color: kBlack, fontWeight: FontWeight.bold, ),textAlign: TextAlign.center,),
+              Text('Welcome to NutriJourney!', style: TextStyle(fontSize: 24, color: kDarkGreen, fontWeight: FontWeight.bold, ),textAlign: TextAlign.center,),
               SizedBox(height: 16,),
               CircleAvatar(
                 backgroundImage: NetworkImage(user!.profileImage),
-                radius: 75,
+                radius: 50,
               ),
               SizedBox(height: 16,),
-
 
               _buildStatisticCard('Your Height', '$height cm'),
               _buildStatisticCard('Your Weight', '$weight kg'),
@@ -123,9 +156,30 @@ class _OnboardingSuccessScreenState extends State<OnboardingSuccessScreen> {
               _buildStatisticCard('Suggested Daily Calories Intake', '${(suggestedCalories).roundToDouble()}'),
               _buildStatisticCard('Your BMI', '${BMI.toStringAsFixed(2)} + ($BMI_Message)'),
 
-              ElevatedButton(
-                  onPressed: _saveData,
-                  child: Text("🍽️Let's Start Your NutriJourney ➡️"),
+              // ElevatedButton(
+              //     onPressed: _saveData,
+              //     child: Text("🍽️Let's Start Your NutriJourney ➡️"),
+              // ),
+
+              InkWell(
+                onTap: _saveData,
+                child: Container(
+                    width: 300,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      color: kPrimaryGreen,
+                    ),
+                    child: const Text(
+                      "🍽️Let's Start Your NutriJourney ➡️",
+                      style: TextStyle(color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
               ),
             ],
           ),
@@ -137,15 +191,20 @@ class _OnboardingSuccessScreenState extends State<OnboardingSuccessScreen> {
 
 Widget _buildStatisticCard(String title, String value) {
   return Container(
+
+    width: 300,
     child: Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:[
-          Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          Text(title, style: TextStyle(color: Colors.grey[600])),
-        ],
-      )
+      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(title, style: TextStyle(color: Colors.grey[600])),
+            Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
     ),
   );
 }

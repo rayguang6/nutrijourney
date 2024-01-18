@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/user.dart';
 import '../providers/user_provider.dart';
@@ -28,7 +29,15 @@ class MealTrackerSummary extends StatelessWidget {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Container(
+              height: 300,
+              width: double.infinity,
+              color: Colors.white,
+            ),
+          );
         }
 
         //method to calculate
@@ -53,7 +62,7 @@ class MealTrackerSummary extends StatelessWidget {
 
         //
         //default calories if none
-        double targetCalories = 2000;
+        double? targetCalories = user?.suggestedCalories?.toDouble();
 
         // Calculate percentages
         num totalMacros = totalCarbs + totalProteins + totalFats;
@@ -66,7 +75,7 @@ class MealTrackerSummary extends StatelessWidget {
 
         return Column(
           children: [
-            CaloriesProgressBar(consumedCalories: totalCalories.toDouble(), targetCalories: 2000),
+            CaloriesProgressBar(consumedCalories: totalCalories.toDouble(), targetCalories: targetCalories!),
             SizedBox(height: 16,),
             SizedBox(
               height: 200,

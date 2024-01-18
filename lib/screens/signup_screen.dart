@@ -205,7 +205,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: const Text(
                           ' Sign In',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w900,
+                              color: kDarkGreen
                           ),
                         ),
                       ),

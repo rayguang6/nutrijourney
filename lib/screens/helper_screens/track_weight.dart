@@ -48,6 +48,10 @@ class _TrackWeightScreenState extends State<TrackWeightScreen> {
         }, SetOptions(merge: true));
       }
 
+      final OnboardingService _onboardingService = OnboardingService();
+
+      await _onboardingService.saveUserData({'weight': weight.round()});
+
       showSnackBar(context, "Successfully Saved $_weight kg at ${formatDate(selectedDate)}! \n ${selectedDate.toIso8601String()}");
     }
   }

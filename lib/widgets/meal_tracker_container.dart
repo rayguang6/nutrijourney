@@ -5,6 +5,7 @@ import 'package:nutrijourney/services/tracker_service.dart';
 import 'package:nutrijourney/widgets/meal_suggest.dart';
 import 'package:nutrijourney/widgets/recipe_card.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/user.dart';
 import '../providers/user_provider.dart';
@@ -76,7 +77,15 @@ class MealTrackerContainer extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Container(
+                      height: 100,
+                      width: double.infinity,
+                      color: Colors.white,
+                    ),
+                  );
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Padding(
@@ -230,19 +239,7 @@ void _showAddMealDialog(BuildContext context, String mealType, String selectedDa
             ),
             ListTile(
               leading: Icon(Icons.camera),
-              title: Text('Image Recognition'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FoodRecognitionScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.camera),
-              title: Text('Image Recognition 2'),
+              title: Text('Image Recognition(BETA)'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(

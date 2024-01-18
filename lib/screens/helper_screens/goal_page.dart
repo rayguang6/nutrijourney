@@ -142,5 +142,8 @@ class _GoalPageState extends State<GoalPage> {
 
     await _onboardingService.saveUserData({'goal': _currentSelected});
     await Provider.of<UserProvider>(context, listen: false).setUser();
+
+    //recalculate the calories
+
   }
 }

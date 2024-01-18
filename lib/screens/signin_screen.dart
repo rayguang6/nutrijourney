@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nutrijourney/screens/dashboard_screen.dart';
 import 'package:nutrijourney/screens/responsive/mobile_screen.dart';
+import 'package:nutrijourney/screens/responsive/responsive_wrapper.dart';
+import 'package:nutrijourney/screens/responsive/web_screen.dart';
 import 'package:nutrijourney/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -51,11 +53,11 @@ class SignInState extends State<SignInScreen> {
 
       await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (context) => const MobileScreen()
-          // builder: (context) => const ResponsiveScreen(
-          //   mobileScreen: MobileScreen(),
-          //   webScreen: WebScreen(),
-          // ),
+          // builder: (context) => const MobileScreen()
+          builder: (context) => const ResponsiveWrapper(
+            mobileScreen: MobileScreen(),
+            webScreen: WebScreen(),
+          ),
         ),
             (route) => false,
       );
@@ -129,7 +131,7 @@ class SignInState extends State<SignInScreen> {
                       'Sign In',
                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     )
-                        : Row(
+                        : const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -141,8 +143,10 @@ class SignInState extends State<SignInScreen> {
 
                                 )
                               ),
+                              SizedBox(width: 10),
                               SpinKitDoubleBounce(
                                 color: kWhite,
+                                size: 16,
                               ),
                             ],
                           )
@@ -163,9 +167,10 @@ class SignInState extends State<SignInScreen> {
                         );
                       },
                       child: const Text(
-                        ' Signup.',
+                        ' Signup',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w900,
+                          color: kDarkGreen
                         ),
                       ),
                     ),

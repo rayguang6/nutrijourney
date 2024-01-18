@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 class BarcodeDetailScreen extends StatelessWidget {
   final Map<String, dynamic> productDetails;
 
@@ -33,7 +34,7 @@ class BarcodeDetailScreen extends StatelessWidget {
 
                 const SizedBox(height: 16,),
                 const Text("Raw JSON Data:", style: TextStyle(fontWeight: FontWeight.bold)),
-                // SelectableText(rawJson, style: TextStyle(fontFamily: "monospace")),
+                SelectableText(rawJson, style: TextStyle(fontFamily: "monospace")),
               ],
             ),
           ),

@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:nutrijourney/utils/constants.dart';
 import 'package:nutrijourney/utils/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/user.dart';
 import '../providers/user_provider.dart';
@@ -143,8 +144,10 @@ class _Dashboard2State extends State<Dashboard2> {
           }
 
         } else {
-          // No meal records found for the selected date
-          // print('No meal records found for $formattedDate');
+          dailyData.totalCalories = 0;
+          dailyData.totalCarbs = 0;
+          dailyData.totalProteins = 0;
+          dailyData.totalFats = 0;
         }
         // weeklyData[formattedDate] = dailyData;
         weeklyData[day] = dailyData;
@@ -156,7 +159,7 @@ class _Dashboard2State extends State<Dashboard2> {
 
     Future<List<FlSpot>> fetchWeeklyWeightData(String userEmail, DateTime startDate) async {
       List<FlSpot> weightDataSpots = [];
-      double lastKnownWeight = 0; // Initialize with a default weight or the most recent known weight
+      double? lastKnownWeight = user?.weight?.toDouble(); // Initialize with a default weight or the most recent known weight
 
       for (int i = 0; i < 7; i++) {
         DateTime currentDate = startDate.add(Duration(days: i));
@@ -175,7 +178,7 @@ class _Dashboard2State extends State<Dashboard2> {
         }
 
         // Use the last known weight for this day
-        weightDataSpots.add(FlSpot(i.toDouble(), lastKnownWeight));
+        weightDataSpots.add(FlSpot(i.toDouble(), lastKnownWeight!));
       }
 
       return weightDataSpots;
@@ -214,12 +217,27 @@ class _Dashboard2State extends State<Dashboard2> {
               // ... rest of your UI
               // Inside your Dashboard2 build method
 
-              Text("Weekly Calories Intake"),
+              Text(
+                "Weekly Calories Intake",
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: kDarkGreen
+                ),
+              ),
               FutureBuilder<Map<String, DailyNutritionData>>(
                 future: fetchWeeklyNutritionData(user!.email, _currentDate),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        height: 300,
+                        width: double.infinity,
+                        color: Colors.white,
+                      ),
+                    );
                   }
                   if (snapshot.hasError) {
                     return Text("Error: ${snapshot.error}");
@@ -236,12 +254,35 @@ class _Dashboard2State extends State<Dashboard2> {
 
             //  DONUT CHART
               SizedBox(height:32),
-              Text("Macronutrient Balance"),
+              Text(
+                "Macronutrient Balance",
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: kDarkGreen
+                ),
+              ),
+              Container(width: 300,
+                child: Text("Your Recommended Balance: \n60% Carbs, 20% fats, 20% proteins", style: TextStyle(
+                ),
+                  textAlign: TextAlign.center
+
+                  ,
+                ),
+              ),
               FutureBuilder<Map<String, DailyNutritionData>>(
                 future: fetchWeeklyNutritionData(user!.email, _currentDate),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        height: 300,
+                        width: double.infinity,
+                        color: Colors.white,
+                      ),
+                    );
                   }
                   if (snapshot.hasError) {
                     return Text("Error: ${snapshot.error}");
@@ -267,11 +308,27 @@ class _Dashboard2State extends State<Dashboard2> {
 
 
               SizedBox(height: 50,),
+              Text(
+                "Weight Tracking",
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: kDarkGreen
+                ),
+              ),
               FutureBuilder<List<FlSpot>>(
                 future: fetchWeeklyWeightData(user.email, _currentDate), // Correctly assign the future
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        height: 300,
+                        width: double.infinity,
+                        color: Colors.white,
+                      ),
+                    );
                   }
                   if (snapshot.hasError) {
                     return Text("Error: ${snapshot.error}");
