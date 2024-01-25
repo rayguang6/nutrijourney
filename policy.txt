@@ -1,0 +1,41 @@
+Privacy Policy for Nutrijourney
+Last Updated: 25 Jan 2024
+
+Welcome to Nutrijourney! This privacy policy outlines how we, Nutrijourney ("we", "us", "our"), managed by Lei Zhi Guang, collect, use, disclose, and safeguard your information when you use our mobile application. Your privacy is critically important to us, and we are committed to protecting it.
+
+1. Information Collection and Use
+We collect information that you provide directly to us when you use our app. This may include:
+
+Personal identifiers like your name, email address, and phone number.
+Health-related data that you input into the app.
+Any other information you choose to provide.
+We use this information to:
+
+Provide, maintain, and improve the app.
+Personalize your user experience.
+Communicate with you, including responding to your inquiries and providing customer support.
+2. Data Sharing and Disclosure
+We do not share or disclose your personal information with third parties except in the following situations:
+
+With service providers who perform services on our behalf.
+If we believe disclosure is necessary to comply with any legal obligation.
+To protect the rights, property, or safety of Nutrijourney, our users, or others.
+3. Data Security
+We implement reasonable security measures to protect your information from unauthorized access, theft, or loss. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee its absolute security.
+
+4. Changes to This Privacy Policy
+We may update our privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page and updating the "Last Updated" date.
+
+5. Your Rights and Choices
+Depending on your location, you may have certain rights regarding your personal information, including the right to access, correct, or delete the data we hold about you.
+
+6. Contact Us
+If you have any questions or concerns about this privacy policy, please contact us at [Your Contact Information].
+
+This template is a starting point. Depending on the specifics of your app, such as the type of data you collect (especially if you deal with more sensitive health-related information), additional details might be necessary. Local laws, such as GDPR in Europe or CCPA in California, may impose additional requirements. Always ensure your policy complies with the laws applicable to your user base.
+
+
+
+
+
+
